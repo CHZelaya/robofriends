@@ -6,13 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 // import { configureStore } from '@reduxjs/toolkit';
 import { createLogger } from 'redux-logger';
-import { createStore, applyMiddleware } from '@reduxjs/toolkit';
-import { searchRobots } from './reducers';
+import thunkMiddleware from 'redux-thunk';
+import { createStore, applyMiddleware, combineReducers } from '@reduxjs/toolkit';
+import { searchRobots, requestRobots } from './reducers';
 import 'tachyons';
 
 const logger = createLogger();
 
-const store = createStore(searchRobots, applyMiddleware(logger));
+const rootReducer = combineReducers({ searchRobots, requestRobots })
+
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
+//* middleware is ordered, so the logger will be the last one to be called
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
