@@ -1,19 +1,12 @@
 import React from 'react';
-import Card from './Card';
+import Card from '../Card/Card';
 
 
 
-// Create an inline style to hide overflow  
-const overflow = {
-    overflow: 'hidden',
-    height: '100%',
-    width: '100%',
-
-}
 
 const CardList = ({ robots }) => {
     return (
-        <div style={overflow}>
+        <div>
             {
                 robots.map((user, i) => {
                     return (

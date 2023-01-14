@@ -3,7 +3,9 @@ import {
     REQUEST_ROBOTS_PENDING,
     REQUEST_ROBOTS_SUCCESS,
     REQUEST_ROBOTS_FAILED
-} from './constants.js';
+} from '../constants/constants.js';
+
+import { apiCall } from '../../api/api.js';
 
 export const setSearchField = (text) => ({
     type: CHANGE_SEARCH_FIELD,
@@ -15,8 +17,7 @@ export const requestRobots = () => (dispatch) => {
     // Dispatch pending action
     dispatch({ type: REQUEST_ROBOTS_PENDING });
     // Fetch users
-    fetch('https://jsonplaceholder.typicode.com/users')
-        .then(response => response.json())
+    apiCall('https://jsonplaceholder.typicode.com/users')
         // Dispatch success action
         .then(data => dispatch({ type: REQUEST_ROBOTS_SUCCESS, payload: data }))
         // Dispatch fail action
